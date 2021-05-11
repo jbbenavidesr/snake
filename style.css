@@ -91,7 +91,7 @@ body {
 }
 
 .board {
-    width: 30rem;
+    width: 25rem;
     margin-right: auto;
     margin-left: auto;
     outline: 1px solid black;
@@ -99,9 +99,9 @@ body {
     flex-wrap: wrap;
 }
 
-.board div {
-    flex: 0 0 3rem;
-    height: 3rem;
+.tile {
+    flex: 0 0 2.5rem;
+    height: 2.5rem;
     background-color: slategray;
 }
 
@@ -110,5 +110,5 @@ body {
 }
 
 .apple {
-    color: red;
+    background-color: red;
 }
