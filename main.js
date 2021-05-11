@@ -61,26 +61,31 @@
     let gameOver = function () {
         clearInterval(gameRunning);
         gameRunning = 0;
+        scoreDisplay.textContent = "Game over!";
     };
 
     let checkEnd = function () {
         if (
             (snake[0] % 10 === 0 && direction === -1) ||
-            (snake[0] % 10 === width && direction === 1) ||
+            (snake[0] % 10 === width - 1 && direction === 1) ||
             (snake[0] / width < 1) & (direction === -width) ||
-            (snake[0] / width >= width - 1) & (direction === -width)
+            (snake[0] / width >= width - 1) & (direction === width) ||
+            board[snake[0] + direction].classList.contains("snake")
         ) {
             gameOver();
+            return true;
         }
+        return false;
     };
 
     let gameStep = function () {
-        checkEnd();
-        let tail = moveSnake();
-        let head = snake[0];
+        if (!checkEnd()) {
+            let tail = moveSnake();
+            let head = snake[0];
 
-        if (board[head].classList.contains("apple")) {
-            eatApple(head, tail);
+            if (board[head].classList.contains("apple")) {
+                eatApple(head, tail);
+            }
         }
     };
 
@@ -108,7 +113,9 @@
         score = 0;
         snake = [2, 1, 0];
         speed = 1000;
+        direction = 1;
 
+        updateScore();
         clearInterval(gameRunning);
         drawSnake();
         generateApple();
